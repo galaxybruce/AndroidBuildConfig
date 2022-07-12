@@ -21,6 +21,7 @@ local.properties
 .externalNativeBuild
 
 mockData/
+repo-local/
 
 
 

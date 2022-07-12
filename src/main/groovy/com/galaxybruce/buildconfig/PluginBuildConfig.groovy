@@ -21,7 +21,7 @@ class PluginBuildConfig implements Plugin<Project> {
     private File buildConfigLibsDir
 
     String BUILD_CONFIG = "build_config"
-    String APP_FLAG = "appFlag"
+    String PLATFORM_FLAG = "platformFlag"
 
     /**
      * 应用基础配置信息
@@ -42,7 +42,7 @@ class PluginBuildConfig implements Plugin<Project> {
             throw new Exception("buildconfig must apply in root project")
         }
         //租户信息
-        String platformNum = Utils.getParameterAnyWhere(project, APP_FLAG)
+        String platformNum = Utils.getParameterAnyWhere(project, PLATFORM_FLAG)
         parseBuildConfig(project, platformNum)
 
         setRootProjectExt(project, config)
