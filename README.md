@@ -12,7 +12,7 @@
   }
 }
 ```
-config.json主要是配置app必须项。build节点中的参数都会编译到rootProject.ext中
+config.json主要是配置app必须项。build节点中的参数都会编译到rootProject.ext中，可以通过以下方式引用。
 ```
 rootProject.ext.build_appName
 rootProject.ext.build_applicationId
@@ -24,7 +24,10 @@ rootProject.ext.build_versionCode
 
 ## 配置文件按照节点的方式以下划线隔开平铺，并且都放在manifestPlaceholders中。
 ```
+// manifestPlaceholder中的key是BUILD_CONFIG
 BUILD_CONFIG=URLEncoder.encode(new JSONObject(map).toString(), "UTF-8")
+
+// 每个节点也单独放在了placeholder中
 build_appName=我是谁
 build_applicationId=com.galaxybruce.test
 build_versionName=1.0.0
