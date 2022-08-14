@@ -49,10 +49,8 @@ class PluginBuildConfig implements Plugin<Project> {
         project.subprojects(new Action<Project>() {
             @Override
             void execute(Project subProject) {
-                if(subProject.name == 'app') {
-                    subProject.afterEvaluate {
-                        handleConfig(subProject, config, configBiz)
-                    }
+                subProject.afterEvaluate {
+                    handleConfig(subProject, config, configBiz)
                 }
             }
         })
@@ -115,6 +113,13 @@ class PluginBuildConfig implements Plugin<Project> {
     }
 
     void handleConfig(Project project, JSONObject jsonObject, JSONObject jsonObjectBiz) {
+        println("assembleThisModule: " + (project.ext.has('assembleThisModule') && project.ext.assembleThisModule))
+        if(project.name != 'app' &&
+                // galaxybruce-pioneer插件中设置的变量，表示该module正在独立运行
+                !(project.ext.has('assembleThisModule') && project.ext.assembleThisModule)) {
+            return
+        }
+
         buildConfig(jsonObject)
         buildConfig(jsonObjectBiz)
 
