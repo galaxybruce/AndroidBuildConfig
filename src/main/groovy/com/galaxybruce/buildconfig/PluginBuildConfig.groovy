@@ -63,12 +63,13 @@ class PluginBuildConfig implements Plugin<Project> {
     void parseBuildConfig(Project project, String appFlag){
         //拼接配置文件路径
         printLog("appFlag: $appFlag")
+        String configDirPath
         if (appFlag == null || appFlag.isEmpty() || "null".equalsIgnoreCase(appFlag)) {
             configDirPath = "$BUILD_CONFIG/config/"
         } else{
             configDirPath = "$BUILD_CONFIG/config_$appFlag/"
         }
-        File buildConfigDir = new File(new File(project.rootProject.rootDir, BUILD_CONFIG), configDirPath)
+        File buildConfigDir = new File(project.rootProject.rootDir, configDirPath)
         printLog "当前配置文件路径: ${buildConfigDir.absolutePath}"
 
         buildConfigFile = new File(buildConfigDir,"config.json")
