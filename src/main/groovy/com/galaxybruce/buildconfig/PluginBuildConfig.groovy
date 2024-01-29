@@ -130,9 +130,15 @@ class PluginBuildConfig implements Plugin<Project> {
         project.android.sourceSets.all { sourceSet ->
             //资源替换
             if (!"main".equals(sourceSet.name)) {
-                sourceSet.res.srcDirs += buildConfigResDir
-                sourceSet.assets.srcDirs += buildConfigAssetsDir
-                sourceSet.jniLibs.srcDirs += buildConfigLibsDir
+                if(buildConfigResDir.exists()) {
+                    sourceSet.res.srcDirs += buildConfigResDir
+                }
+                if(buildConfigAssetsDir.exists()) {
+                    sourceSet.assets.srcDirs += buildConfigAssetsDir
+                }
+                if(buildConfigLibsDir.exists()) {
+                    sourceSet.jniLibs.srcDirs += buildConfigLibsDir
+                }
             }
         }
         project.android.applicationVariants.all { variant ->
